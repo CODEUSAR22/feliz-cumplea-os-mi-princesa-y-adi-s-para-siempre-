@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti...</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: black;
+        color: white;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.3rem;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    background: #ff4b2b;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ff416c;
+    transform: scale(1.05);
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ff4b2b;
+}
+
+.heart {
+    font-size: 2rem;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+</style>
+</head>
+<body><!-- Música de fondo --><audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b2f0c0d94.mp3?filename=sad-piano-ambient-110997.mp3" type="audio/mpeg">
+</audio><!-- Partículas --><canvas id="stars"></canvas>
+
+<nav>
+    <a href="#sec1">Inicio</a>
+    <a href="#sec2">Carta</a>
+    <a href="#sec3">Despedida</a>
+    <a href="#sec4">Recuerdo</a>
+</nav><section id="sec1">
+    <h1>Feliz Cumpleaños</h1>
+    <p>
+        Hoy no es un día cualquiera... hoy nació alguien que cambió mi mundo por completo.
+        Aunque las cosas no sean como antes, siempre voy a desearte lo mejor.
+    </p>
+    <div class="heart">❤️</div>
+</section><section id="sec2">
+    <h1>Para Ti</h1>
+    <p>
+        Quiero que sepas que fuiste una de las personas más importantes en mi vida.
+        Gracias por cada momento, cada risa, cada recuerdo.
+        Nunca voy a olvidar lo que vivimos.
+    </p>
+    <p>
+        Aunque nuestros caminos se separen, siempre vas a tener un lugar especial en mi corazón.
+    </p>
+</section><section id="sec3">
+    <h1>Adiós...</h1>
+    <p>
+        Este no es un adiós con odio, es un adiós lleno de amor.
+        Te dejo ir deseándote felicidad, paz y una vida hermosa.por cierto este es el último adiós aunque recuerda que siempre voy estar acá por si necesitas ayuda Pero eso de rogarte no funciona más estoy cansado y vos también lo estás.
+    </p>
+    <p>
+        Cuídate mucho... y feliz cumpleaños una vez más.
+    </p>
+    <button class="btn" onclick="alert('Siempre te voy a recordar ❤️')">Un último mensaje</button>
+</section><section id="sec4">
+    <h1>Un Último Recuerdo</h1>
+    <p>
+        Hay momentos que nunca se olvidan... y tú eres uno de ellos.
+        No importa el tiempo ni la distancia, lo vivido siempre será parte de mí.
+    </p>
+    <p>
+        Ojalá que la vida te regale todo lo que mereces.
+        Donde sea que estés, siempre te voy a desear lo mejor.
+    </p>
+</section><script>
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+
+for (let i = 0; i < 200; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5,
+        velocity: Math.random() * 0.5
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        star.y += star.velocity;
+
+        if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+        }
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script></body>
+</html>
